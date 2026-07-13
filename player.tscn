@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://cf346vohxtpu4"]
+
+[ext_resource type="Script" uid="uid://di2vjxe4fty8d" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://dk7hybcxt2skj" path="res://ninja_platformer_resources/ninja_upper.png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://cflllgoxmqhra" path="res://ninja_platformer_resources/ninja_lower.png" id="3_sweqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe2ad"]
+size = Vector2(20, 23)
+
+[sub_resource type="Animation" id="Animation_2hs0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dw050"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_1jxqw"]
+resource_name = "stand"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dw050"]
+_data = {
+&"RESET": SubResource("Animation_2hs0m"),
+&"run": SubResource("Animation_dw050"),
+&"stand": SubResource("Animation_1jxqw")
+}
+
+[sub_resource type="Animation" id="Animation_i3pqv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hqtel"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_sweqy"]
+resource_name = "stand"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sweqy"]
+_data = {
+&"RESET": SubResource("Animation_i3pqv"),
+&"run": SubResource("Animation_hqtel"),
+&"stand": SubResource("Animation_sweqy")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=639711189]
+z_index = 50
+script = ExtResource("1_i3pqv")
+metadata/_edit_group_ = true
+
+[node name="SpriteUpper" type="Sprite2D" parent="." unique_id=1399992243]
+z_index = 1
+texture = ExtResource("2_hqtel")
+offset = Vector2(16, 0)
+hframes = 15
+
+[node name="SpriteLower" type="Sprite2D" parent="." unique_id=1972471701]
+texture = ExtResource("3_sweqy")
+offset = Vector2(16, 0)
+hframes = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1137986571]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_qe2ad")
+
+[node name="AnimationPlayerUpper" type="AnimationPlayer" parent="." unique_id=741607094]
+libraries/ = SubResource("AnimationLibrary_dw050")
+
+[node name="AnimationPlayerLower" type="AnimationPlayer" parent="." unique_id=1333670477]
+libraries/ = SubResource("AnimationLibrary_sweqy")

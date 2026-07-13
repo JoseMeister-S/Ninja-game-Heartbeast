@@ -1,12 +1,7 @@
 [gd_scene format=4 uid="uid://cpsfds6dapywt"]
 
-[ext_resource type="Script" uid="uid://di2vjxe4fty8d" path="res://player.gd" id="1_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://dk7hybcxt2skj" path="res://ninja_platformer_resources/ninja_upper.png" id="2_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://cflllgoxmqhra" path="res://ninja_platformer_resources/ninja_lower.png" id="3_036b0"]
+[ext_resource type="PackedScene" uid="uid://cf346vohxtpu4" path="res://player.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://b21ych6eb01nw" path="res://ninja_platformer_resources/graybox.png" id="4_aqk2v"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe2ad"]
-size = Vector2(20, 23)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_036b0"]
 texture = ExtResource("4_aqk2v")
@@ -19,26 +14,8 @@ sources/0 = SubResource("TileSetAtlasSource_036b0")
 
 [node name="World" type="Node2D" unique_id=877033920]
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=439885728]
-z_index = 50
-position = Vector2(157, 84)
-script = ExtResource("1_tlwt5")
-metadata/_edit_group_ = true
-
-[node name="SpriteUpper" type="Sprite2D" parent="Player" unique_id=567653206]
-z_index = 1
-texture = ExtResource("2_aqk2v")
-offset = Vector2(16, 0)
-hframes = 15
-
-[node name="SpriteLower" type="Sprite2D" parent="Player" unique_id=279767630]
-texture = ExtResource("3_036b0")
-offset = Vector2(16, 0)
-hframes = 15
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=476576729]
-position = Vector2(0, 1.5)
-shape = SubResource("RectangleShape2D_qe2ad")
+[node name="Player" parent="." unique_id=639711189 instance=ExtResource("1_fj7yv")]
+position = Vector2(27, 144)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=382194941]
 tile_map_data = PackedByteArray("AAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAACAAoAAAAAAAAAAAABAAoAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAATAAkAAAAAAAAAAAATAAUAAAAAAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAAMAAUAAAAAAAAAAAANAAUAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAAUAAAAAAAAAAAAQAAUAAAAAAAAAAAARAAUAAAAAAAAAAAASAAUAAAAAAAAAAAA=")
