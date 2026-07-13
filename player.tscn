@@ -12,7 +12,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/path = NodePath("Anchor/SpriteUpper:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,6 +20,24 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_b26j0"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/SpriteUpper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_dw050"]
@@ -30,7 +48,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/path = NodePath("Anchor/SpriteUpper:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +66,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteUpper:frame")
+tracks/0/path = NodePath("Anchor/SpriteUpper:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,6 +79,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dw050"]
 _data = {
 &"RESET": SubResource("Animation_2hs0m"),
+&"jump": SubResource("Animation_b26j0"),
 &"run": SubResource("Animation_dw050"),
 &"stand": SubResource("Animation_1jxqw")
 }
@@ -70,7 +89,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/path = NodePath("Anchor/SpriteLower:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -78,6 +97,24 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_n7ghd"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/SpriteLower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_hqtel"]
@@ -88,7 +125,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/path = NodePath("Anchor/SpriteLower:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,7 +143,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteLower:frame")
+tracks/0/path = NodePath("Anchor/SpriteLower:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,6 +156,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sweqy"]
 _data = {
 &"RESET": SubResource("Animation_i3pqv"),
+&"jump": SubResource("Animation_n7ghd"),
 &"run": SubResource("Animation_hqtel"),
 &"stand": SubResource("Animation_sweqy")
 }
@@ -128,13 +166,15 @@ z_index = 50
 script = ExtResource("1_i3pqv")
 metadata/_edit_group_ = true
 
-[node name="SpriteUpper" type="Sprite2D" parent="." unique_id=1399992243]
+[node name="Anchor" type="Node2D" parent="." unique_id=699036376]
+
+[node name="SpriteUpper" type="Sprite2D" parent="Anchor" unique_id=1399992243]
 z_index = 1
 texture = ExtResource("2_hqtel")
 offset = Vector2(16, 0)
 hframes = 15
 
-[node name="SpriteLower" type="Sprite2D" parent="." unique_id=1972471701]
+[node name="SpriteLower" type="Sprite2D" parent="Anchor" unique_id=1972471701]
 texture = ExtResource("3_sweqy")
 offset = Vector2(16, 0)
 hframes = 15
