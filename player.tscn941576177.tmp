@@ -257,10 +257,8 @@ _data = {
 z_index = 50
 safe_margin = 0.02
 script = ExtResource("1_i3pqv")
-metadata/_edit_group_ = true
 
 [node name="Anchor" type="Node2D" parent="." unique_id=699036376]
-metadata/_edit_group_ = true
 
 [node name="SpriteUpper" type="Sprite2D" parent="Anchor" unique_id=1399992243]
 z_index = 1
@@ -278,11 +276,11 @@ frame = 8
 
 [node name="RayCastUpper" type="RayCast2D" parent="Anchor" unique_id=848619360]
 position = Vector2(4, -14)
-target_position = Vector2(5, 0)
+target_position = Vector2(4, 0)
 
 [node name="RayCastLower" type="RayCast2D" parent="Anchor" unique_id=200397940]
 position = Vector2(4, -5)
-target_position = Vector2(5, 0)
+target_position = Vector2(4, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1137986571]
 position = Vector2(-0.5, -10.5)

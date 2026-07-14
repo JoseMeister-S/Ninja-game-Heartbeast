@@ -39,6 +39,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	print(ray_cast_upper.is_colliding(), " ", ray_cast_lower.is_colliding())
 	match state:
 		STATE.MOVE:
 			coyote_time -= delta
@@ -74,9 +75,11 @@ func _physics_process(delta: float) -> void:
 				coyote_time = 0.1
 			
 			if should_wall_climb():
+				animation_player_upper.play("hang")
 				state=STATE.CLIMB
 			
 		STATE.CLIMB:
+			print(ray_cast_upper.is_colliding(), " ", ray_cast_lower.is_colliding())
 			var wall_normal =get_wall_normal()
 			
 			var y_axis = Input.get_axis("move_up", "move_down")
@@ -92,7 +95,17 @@ func _physics_process(delta: float) -> void:
 			
 			var request_detach: bool = sign(x_axis) == wall_normal.x
 			
+			var request_wall_jump: bool =(request_detach or Input.is_action_just_pressed("jump") && not Input.is_action_just_pressed("move_down"))
+			
+			if request_wall_jump:
+				velocity.x = wall_normal.x * max_speed
+				anchor.scale.x = sign(velocity.x)
+				jump()
+				state=STATE.MOVE
+				
 			if not should_wall_climb() || request_detach:
+				if Input.is_action_pressed("move_up"):
+					jump()
 				state=STATE.MOVE
 			
 func jump() -> void:
@@ -119,6 +132,7 @@ func apply_gravity(delta) -> void:
 			velocity.y += down_gravity * delta
 
 func should_wall_climb() -> bool:
+	
 	return (
-		ray_cast_upper.is_colliding() && ray_cast_lower.is_colliding() && not is_on_floor() && is_on_wall_only()
+		ray_cast_upper.is_colliding() && ray_cast_lower.is_colliding() && not is_on_floor() && is_on_wall_only() 
 	)
