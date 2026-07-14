@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cflllgoxmqhra" path="res://ninja_platformer_resources/ninja_lower.png" id="3_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qe2ad"]
-size = Vector2(20, 23)
+size = Vector2(15, 23)
 
 [sub_resource type="Animation" id="Animation_2hs0m"]
 length = 0.001
@@ -114,7 +114,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [8]
 }
 
 [sub_resource type="Animation" id="Animation_n7ghd"]
@@ -188,17 +188,20 @@ metadata/_edit_group_ = true
 
 [node name="SpriteUpper" type="Sprite2D" parent="Anchor" unique_id=1399992243]
 z_index = 1
+position = Vector2(-2, -13)
 texture = ExtResource("2_hqtel")
 offset = Vector2(16, 0)
 hframes = 15
 
 [node name="SpriteLower" type="Sprite2D" parent="Anchor" unique_id=1972471701]
+position = Vector2(-2, -13)
 texture = ExtResource("3_sweqy")
 offset = Vector2(16, 0)
 hframes = 15
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1137986571]
-position = Vector2(0, 1.5)
+position = Vector2(-0.5, -10.5)
 shape = SubResource("RectangleShape2D_qe2ad")
 
 [node name="AnimationPlayerUpper" type="AnimationPlayer" parent="." unique_id=741607094]
