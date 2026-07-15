@@ -5,9 +5,9 @@ enum STATE{
 }
 
 @export var max_speed =120
-@export var acceleration= 1000.0
+@export var acceleration= 10000.0
 @export var air_acceleration = 2000.0
-@export var friction = 1000.0
+@export var friction = 10000.0
 @export var air_friction =500.0
 @export var up_gravity =500
 @export var down_gravity = 600
@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 	print(ray_cast_upper.is_colliding(), " ", ray_cast_lower.is_colliding())
 	match state:
 		STATE.MOVE:
+			
 			coyote_time -= delta
 			var x_input =Input.get_axis("move_left","move_right")
 			
@@ -79,7 +80,6 @@ func _physics_process(delta: float) -> void:
 				state=STATE.CLIMB
 			
 		STATE.CLIMB:
-			print(ray_cast_upper.is_colliding(), " ", ray_cast_lower.is_colliding())
 			var wall_normal =get_wall_normal()
 			
 			var y_axis = Input.get_axis("move_up", "move_down")
