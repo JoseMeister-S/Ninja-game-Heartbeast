@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://di2vjxe4fty8d" path="res://player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://dk7hybcxt2skj" path="res://ninja_platformer_resources/ninja_upper.png" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://cflllgoxmqhra" path="res://ninja_platformer_resources/ninja_lower.png" id="3_sweqy"]
+[ext_resource type="Script" uid="uid://cbk8oiutkfd0q" path="res://hitbox.gd" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://b2vcqxkqhfw3d" path="res://hurtbox.gd" id="5_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qe2ad"]
 size = Vector2(15, 23)
@@ -21,10 +23,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/Hitbox/CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array()]
+}
 
 [sub_resource type="Animation" id="Animation_nvl01"]
 resource_name = "attack"
-length = 0.5
+length = 0.39999999999999997
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -37,6 +51,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/Hitbox/CollisionPolygon2D:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(), PackedVector2Array(8, -10, 19, -10, 19, -11, 23, -11, 23, -12, 26, -12, 26, -13, 28, -13, 28, -14, 29, -14, 29, -15, 30, -15, 30, -19, 29, -19, 29, -20, 28, -20, 28, -21, 26, -21, 26, -22, 24, -22, 24, -23, 21, -23, 21, -24, 17, -24, 17, -25, 10, -25, 10, -26, 4, -26, 4, -25, 1, -25, 1, -24, 8, -24, 8, -23, 13, -23, 13, -22, 15, -22, 15, -21, 17, -21, 17, -20, 18, -20, 18, -19, 19, -19, 19, -16, 18, -16, 18, -14, 16, -14, 16, -13, 14, -13, 14, -12, 11, -12, 11, -12, 11, -11, 8, -11), PackedVector2Array(1, -26, 1, -25, 9, -25, 9, -26, 15, -26, 15, -25, 19, -25, 19, -26, 16, -26, 16, -27, 4, -27, 4, -26), PackedVector2Array(11, -29, 7, -29, 1, -26, 1, -25, 2, -25, 7, -27, 7, -28, 11, -28), PackedVector2Array()]
 }
 
 [sub_resource type="Animation" id="Animation_ivps1"]
@@ -283,6 +309,24 @@ target_position = Vector2(5, 0)
 [node name="RayCastLower" type="RayCast2D" parent="Anchor" unique_id=200397940]
 position = Vector2(4, -5)
 target_position = Vector2(5, 0)
+
+[node name="Hitbox" type="Area2D" parent="Anchor" unique_id=1067578574]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("4_hqtel")
+metadata/_custom_type_script = "uid://cbk8oiutkfd0q"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Anchor/Hitbox" unique_id=122844032]
+
+[node name="Hurtbox" type="Area2D" parent="Anchor" unique_id=645229016]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_sweqy")
+metadata/_custom_type_script = "uid://b2vcqxkqhfw3d"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Hurtbox" unique_id=16199587]
+position = Vector2(-0.5, -10.5)
+shape = SubResource("RectangleShape2D_qe2ad")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1137986571]
 position = Vector2(-0.5, -10.5)

@@ -22,6 +22,7 @@ var coyote_time = 0
 @onready var animation_player_lower: AnimationPlayer = $AnimationPlayerLower
 
 @onready var animation_player_upper: AnimationPlayer = $AnimationPlayerUpper
+@onready var hurtbox: Hurtbox = $Anchor/Hurtbox
 
 @onready var anchor: Node2D = $Anchor
 
@@ -35,7 +36,8 @@ func _ready() -> void:
 		animation_player_upper.play(animation_player_lower.current_animation)
 		animation_player_upper.seek(animation_player_lower.current_animation_position)
 		)
-	
+	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
+		queue_free())
 
 
 func _physics_process(delta: float) -> void:
