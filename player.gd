@@ -36,7 +36,7 @@ func _ready() -> void:
 		animation_player_upper.play(animation_player_lower.current_animation)
 		animation_player_upper.seek(animation_player_lower.current_animation_position)
 		)
-	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
+	hurtbox.hurt.connect(func(_other_hitbox: Hitbox):
 		queue_free())
 
 

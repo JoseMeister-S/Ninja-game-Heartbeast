@@ -8,9 +8,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func on_area_entered(area_2d: Area2D) -> void:
 	assert(area_2d is Hurtbox, "The hitbox detected an area that wasn't a hurtbox.")

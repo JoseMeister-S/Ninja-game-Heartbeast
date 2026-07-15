@@ -1,4 +1,6 @@
 extends Node2D
+
+const SPARK_PARTICLE_BURST_EFFECT =preload ("res://sparks_particle_burst_effect.tscn")
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 @onready var hurtbox: Hurtbox = $Hurtbox
@@ -14,13 +16,13 @@ extends Node2D
 
 func _ready() -> void:
 	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
+		var spark_particle = SPARK_PARTICLE_BURST_EFFECT.instantiate()
+		get_tree().current_scene.add_child(spark_particle)
+		spark_particle.global_position = (sprite_2d.global_position + Vector2(0, -7))
 		stats.health -= other_hitbox.damage
 		effects_animation_player.play("hit_flash")
 		shaker.shake(2, 0.2)
 
 		)
 	stats.no_health.connect(func(): queue_free())
-	pass
-
-func _process(delta: float) -> void:
 	pass

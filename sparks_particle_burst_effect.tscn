@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://x0thbl2sq7tm"]
+
+[ext_resource type="Texture2D" uid="uid://d30563e6o6egq" path="res://ninja_platformer_resources/hit_particle.png" id="1_ikhf4"]
+[ext_resource type="Script" uid="uid://86asf5n3pc4s" path="res://particle_burst.gd" id="2_p8usj"]
+
+[sub_resource type="Curve" id="Curve_f8jgk"]
+_data = [Vector2(0, 0.8787878), 0.0, 0.0, 0, 0, Vector2(0.99999994, 0.10389608), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_axtky"]
+curve = SubResource("Curve_f8jgk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe2ad"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_axtky")
+
+[node name="SparksParticleBurstEffect" type="GPUParticles2D" unique_id=2029897806]
+amount = 3
+texture = ExtResource("1_ikhf4")
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_qe2ad")
+script = ExtResource("2_p8usj")
+metadata/_custom_type_script = "uid://86asf5n3pc4s"
