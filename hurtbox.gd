@@ -4,6 +4,12 @@ var is_invincible =false
 
 signal hurt(other_hitbox: Hitbox)
 
+func take_hit(other_hitbox: Hitbox)-> void:
+	if is_invincible: return
+	hurt.emit(other_hitbox)
+		
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

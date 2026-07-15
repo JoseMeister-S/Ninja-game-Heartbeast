@@ -26,3 +26,6 @@ tile_set = SubResource("TileSet_qe2ad")
 
 [node name="EnemyCanon" parent="." unique_id=311372034 instance=ExtResource("3_tlwt5")]
 position = Vector2(245, 162)
+
+[node name="EnemyCanon2" parent="." unique_id=26866898 instance=ExtResource("3_tlwt5")]
+position = Vector2(165, 160)

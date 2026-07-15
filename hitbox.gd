@@ -15,6 +15,5 @@ func _process(delta: float) -> void:
 func on_area_entered(area_2d: Area2D) -> void:
 	assert(area_2d is Hurtbox, "The hitbox detected an area that wasn't a hurtbox.")
 	var hurtbox= area_2d as Hurtbox
-	if hurtbox.is_invincible: return
 	hurtbox.hurt.emit(self)
 	pass
