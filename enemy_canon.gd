@@ -1,5 +1,7 @@
 extends Node2D
 
+const IMPACT_PARTICLE_BURST = preload("uid://sser4itbauvj")
+
 const SPARK_PARTICLE_BURST_EFFECT =preload ("res://sparks_particle_burst_effect.tscn")
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
@@ -19,6 +21,11 @@ func _ready() -> void:
 		var spark_particle = SPARK_PARTICLE_BURST_EFFECT.instantiate()
 		get_tree().current_scene.add_child(spark_particle)
 		spark_particle.global_position = (sprite_2d.global_position + Vector2(0, -7))
+		
+		var impact_particle = IMPACT_PARTICLE_BURST.instantiate()
+		get_tree().current_scene.add_child(impact_particle)
+		impact_particle.global_position = sprite_2d.global_position.move_toward(other_hitbox.global_position, - 8)
+		impact_particle.rotation = sprite_2d.global_position.direction_to(other_hitbox.global_position).angle()
 		stats.health -= other_hitbox.damage
 		effects_animation_player.play("hit_flash")
 		shaker.shake(2, 0.2)
