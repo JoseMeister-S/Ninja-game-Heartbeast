@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cf346vohxtpu4"]
 
 [ext_resource type="Script" uid="uid://di2vjxe4fty8d" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="Material" uid="uid://dxq48jf6hruy0" path="res://effects_material.tres" id="2_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dk7hybcxt2skj" path="res://ninja_platformer_resources/ninja_upper.png" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://cflllgoxmqhra" path="res://ninja_platformer_resources/ninja_lower.png" id="3_sweqy"]
 [ext_resource type="Script" uid="uid://cbk8oiutkfd0q" path="res://hitbox.gd" id="4_hqtel"]
@@ -38,7 +39,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_nvl01"]
 resource_name = "attack"
-length = 0.39999999999999997
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -279,6 +280,116 @@ _data = {
 &"stand": SubResource("Animation_sweqy")
 }
 
+[sub_resource type="Animation" id="Animation_u1c27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/SpriteLower:material:shader_parameter/flash_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/SpriteUpper:material:shader_parameter/flash_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anchor/Hurtbox:is_invincible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:state")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_op7ga"]
+resource_name = "hitflash"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/SpriteLower:material:shader_parameter/flash_enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor/SpriteUpper:material:shader_parameter/flash_enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Anchor/Hurtbox:is_invincible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:state")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q13i1"]
+_data = {
+&"RESET": SubResource("Animation_u1c27"),
+&"hitflash": SubResource("Animation_op7ga")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=639711189]
 z_index = 50
 safe_margin = 0.02
@@ -290,12 +401,14 @@ metadata/_edit_group_ = true
 
 [node name="SpriteUpper" type="Sprite2D" parent="Anchor" unique_id=1399992243]
 z_index = 1
+material = ExtResource("2_2hs0m")
 position = Vector2(-2, -13)
 texture = ExtResource("2_hqtel")
 offset = Vector2(16, 0)
 hframes = 15
 
 [node name="SpriteLower" type="Sprite2D" parent="Anchor" unique_id=1972471701]
+material = ExtResource("2_2hs0m")
 position = Vector2(-2, -13)
 texture = ExtResource("3_sweqy")
 offset = Vector2(16, 0)
@@ -337,3 +450,6 @@ libraries/ = SubResource("AnimationLibrary_dw050")
 
 [node name="AnimationPlayerLower" type="AnimationPlayer" parent="." unique_id=1333670477]
 libraries/ = SubResource("AnimationLibrary_sweqy")
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="." unique_id=22007850]
+libraries/ = SubResource("AnimationLibrary_q13i1")

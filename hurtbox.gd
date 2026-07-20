@@ -1,15 +1,15 @@
 class_name Hurtbox extends Area2D
 
-var is_invincible =false
+@export var is_invincible = false :
+	set(value):
+		is_invincible = value
+		var children = get_children()
+		for child in children:
+			if child is not CollisionShape2D || child is not CollisionPolygon2D: continue
+			child.set_deferred("disabled", is_invincible)
 
 signal hurt(other_hitbox: Hitbox)
 
 func take_hit(other_hitbox: Hitbox)-> void:
 	if is_invincible: return
 	hurt.emit(other_hitbox)
-		
-	pass
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.

@@ -1,7 +1,8 @@
 extends CharacterBody2D
 enum STATE{
 	MOVE,
-	CLIMB
+	CLIMB,
+	HIT
 }
 
 @export var max_speed =120
@@ -13,20 +14,31 @@ enum STATE{
 @export var down_gravity = 600
 @export var jump_amount= 200
 
+
+
 var coyote_time = 0
 @export var state = STATE.MOVE
 
+
 @onready var ray_cast_upper: RayCast2D = $Anchor/RayCastUpper
 @onready var ray_cast_lower: RayCast2D = $Anchor/RayCastLower
+
+@onready var effects_animation_player: AnimationPlayer = $EffectsAnimationPlayer
 
 @onready var animation_player_lower: AnimationPlayer = $AnimationPlayerLower
 
 @onready var animation_player_upper: AnimationPlayer = $AnimationPlayerUpper
 @onready var hurtbox: Hurtbox = $Anchor/Hurtbox
+@onready var sprite_upper: Sprite2D = $Anchor/SpriteUpper
+@onready var sprite_lower: Sprite2D = $Anchor/SpriteLower
 
 @onready var anchor: Node2D = $Anchor
 
+@onready var shaker_upper: = Shaker.new(sprite_upper)
+@onready var shaker_lower: = Shaker.new(sprite_lower)
+
 func _ready() -> void:
+	sprite_lower.material.set_shader_parameter("flash_color", Color("ff4d4d"))
 	animation_player_lower.current_animation_changed.connect(func (animation_name: String):
 		if animation_player_upper.current_animation == "attack": return
 		animation_player_upper.play(animation_name)
@@ -37,11 +49,21 @@ func _ready() -> void:
 		animation_player_upper.seek(animation_player_lower.current_animation_position)
 		)
 	hurtbox.hurt.connect(func(_other_hitbox: Hitbox):
-		queue_free())
+		var x_direction = sign(_other_hitbox.global_position.direction_to(global_position).x)
+		if x_direction == 0: x_direction = -1
+		velocity.x = x_direction * max_speed
+		jump(jump_amount/2)
+		
+		state=STATE.HIT
+		shaker_lower.shake(3,0.3)
+		shaker_upper.shake(3,0.3)
+		animation_player_lower.play("jump")
+		effects_animation_player.play("hitflash")
+		)
 
 
 func _physics_process(delta: float) -> void:
-	print(ray_cast_upper.is_colliding(), " ", ray_cast_lower.is_colliding())
+	print(state)
 	match state:
 		STATE.MOVE:
 			
@@ -110,8 +132,17 @@ func _physics_process(delta: float) -> void:
 					jump()
 				state=STATE.MOVE
 			
-func jump() -> void:
-	velocity.y = -jump_amount
+		STATE.HIT:
+			move_and_slide()
+			apply_gravity(delta)
+			apply_friction(delta)
+			
+			
+			
+func jump(amount: float = jump_amount) -> void:
+	velocity.y = -amount
+
+
 	
 
 func accelerate_horilzontally(horizontal_direction: float, delta: float) -> void:

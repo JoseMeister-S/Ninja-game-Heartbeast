@@ -12,8 +12,7 @@ config_version=5
 
 config/name="Nijaplatformer-Heartbeast"
 run/main_scene="uid://cpsfds6dapywt"
-run/disable_stdout=true
-run/disable_stderr=true
+run/print_header=false
 run/enable_alt_space_menu=true
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
